@@ -1,16 +1,18 @@
 import requests
 import smtplib
+import creds
 
-my_gmail = "necodetesting@gmail.com"
-gmail_pw = "apfbufdletsvbwtc"
+my_gmail = creds.my_gmail
+gmail_pw = creds.gmail_pw
+my_yahoo = creds.my_yahoo
 
 STOCK = "TSLA"
 COMPANY_NAME = "Tesla Inc"
 
-STOCK_ENDPOINT = "https://www.alphavantage.co/query"
-stock_api = "ZYK541CL7WX0HR1A"
-NEWS_ENDPOINT = "https://newsapi.org/v2/everything"
-news_api = "963c4387ffa84887a006ff909936ee14"
+STOCK_ENDPOINT = creds.STOCK_ENDPOINT
+stock_api = creds.stock_api
+NEWS_ENDPOINT = creds.NEWS_ENDPOINT
+news_api = creds.news_api
 
 stock_parameters = {
     "function": "TIME_SERIES_DAILY",
@@ -46,5 +48,5 @@ if change < -.05 or change > .05:
             connection.login(user=my_gmail, password=gmail_pw)
             connection.sendmail(
                 from_addr=my_gmail,
-                to_addrs="necodetesting@yahoo.com",
+                to_addrs=my_yahoo,
                 msg=f"{STOCK} {change_symbol}\n\nHeadline: {article_title}\nBrief: {article_description}")
